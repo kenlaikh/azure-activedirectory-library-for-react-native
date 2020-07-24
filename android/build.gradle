@@ -29,16 +29,14 @@ android {
 repositories {
     mavenCentral()
     maven {
-        url "$projectDir/../example/node_modules/react-native/android"
-    }
-    maven {
-        url "$projectDir/../../react-native/android"
+        // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+        url "$rootDir/../node_modules/react-native/android"
     }
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':ReactAndroid')
+    //noinspection GradleDynamicVersion
+    implementation 'com.facebook.react:react-native:+'  // From node_modules
     compile 'com.microsoft.aad:adal:1.12.0'
 }
   
