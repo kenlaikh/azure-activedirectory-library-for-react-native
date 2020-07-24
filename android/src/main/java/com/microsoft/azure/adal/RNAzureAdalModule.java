@@ -70,13 +70,15 @@ public class RNAzureAdalModule extends ReactContextBaseJavaModule {
                           Boolean validateAuthority,
                           String clientId,
                           String redirectUrl,
-                          Boolean useBroker) {
+                          Boolean useBroker,
+                          Promise promise) {
         AuthenticationSettings.INSTANCE.setUseBroker(useBroker);
         Log.w("configure", authority);
         AuthenticationContext context = new AuthenticationContext(this.reactContext.getCurrentActivity(), authority, validateAuthority);
         Configuration configuration = new Configuration(authority, validateAuthority, clientId, redirectUrl, useBroker, context);
         configurations.put(authority, configuration);
         currentConfiguration = configuration;
+        promise.resolve(true);
     }
 
 

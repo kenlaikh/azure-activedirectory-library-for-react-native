@@ -50,12 +50,16 @@ export default class AzureAdal {
    * @returns Promise
    */
   async logout (redirectUri) {
-    await RNAzureAdal.clearCoockieAndCache();
-    const promise = fetch(
-      "https://login.windows.net/common/oauth2/logout?post_logout_redirect_uri=" +
-      redirectUri
-    ).then(response => true);
-    return promise;
+    try {
+      await RNAzureAdal.clearCoockieAndCache();
+      await fetch(
+        "https://login.windows.net/common/oauth2/logout?post_logout_redirect_uri=" +
+        redirectUri
+      );
+      return true;
+    } catch (error) {
+      return Promise.reject(error);
+    }
   }
   
   /**
