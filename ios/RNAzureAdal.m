@@ -170,6 +170,15 @@ RCT_REMAP_METHOD(clearCoockieAndCache,
                  resolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject){
     @try {
+        // Add Cookies Clear
+        NSHTTPCookie *cookie;
+
+        NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+        for (cookie in [storage cookies])
+        {
+            [storage deleteCookie:cookie];
+        }
+
         ADKeychainTokenCache* cacheStore = [ADKeychainTokenCache new];
 
         dispatch_async(dispatch_get_main_queue(), ^{
